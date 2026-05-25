@@ -163,7 +163,6 @@ For the 80% append-only case — transactions, events, sensor readings, logs —
 | `COMPUTE_FAMILY = 'STANDARD_S'` is rejected. | Use `STANDARD_M` (smallest pg_lake-eligible tier). `BURSTABLE` doesn't support pg_lake at all. |
 | Postgres instances ignore `ALLOWED_IP_LIST` on the network policy. | Use `ALLOWED_NETWORK_RULE_LIST` with rules in `MODE = POSTGRES_INGRESS`. |
 | Iceberg foreign tables in pg_lake reject `PRIMARY KEY` / `UNIQUE`. | Drop those constraints in the Iceberg-side schema. The heap table can still have them. |
-| PG-discovered tables preserve **lowercase** identifiers in Snowflake. | Quote them: `PG_SHOP_LIVE."shop"."transactions_iceberg"`, `"customer_id"`. |
 | `incremental.pipelines` doesn't have `source_table_name` or `last_processed_value` columns. | The actual columns are `source_relation` (regclass) on `incremental.pipelines`, and `last_processed_time` on `incremental.time_interval_pipelines`. Join the two. |
 | `incremental.executions` doesn't exist. | Use `cron.job_run_details` filtered by command text. |
 | First call to `create_time_interval_pipeline` processes the **entire history → now()** in one shot. | Expected behavior. After that, ongoing windows respect `time_interval`. |

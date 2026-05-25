@@ -18,8 +18,8 @@ flowchart LR
       D[CATALOG INTEGRATION<br/>SNOWFLAKE_POSTGRES] --> E[CREATE DATABASE<br/>LINKED_CATALOG]
       E --> F[Auto-discovered<br/>Iceberg tables]
     end
-    B -. vended creds<br/>Snowflake-managed storage .-> D
-    C -. .-> D
+    B -.->|vended creds<br/>Snowflake-managed storage| D
+    C -.-> D
     F --> G[SELECT / JOIN<br/>analytics in Snowflake]
 ```
 
